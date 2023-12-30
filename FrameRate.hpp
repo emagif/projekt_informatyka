@@ -1,0 +1,22 @@
+#pragma once
+#include <SFML/Graphics.hpp>
+
+class FrameRate
+{
+private: 
+    sf::Text frameRateText;
+    sf::Font font;
+
+    double timer;
+
+public: 
+
+    FrameRate(); // konstruktor
+    ~FrameRate(); // destruktor
+
+    void Initialize();
+    void Load();
+    void Update(double deltaTime);
+    void Draw(sf::RenderWindow& window);
+
+};

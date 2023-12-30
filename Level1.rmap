@@ -1,0 +1,12 @@
+[Map]
+version=1
+tilesheet=/home/emmanuel/Pulpit/projekt_zapas/Tilemap/tilemap_packed.png
+name=Level 1 
+mapWidth=3
+mapHeight=2
+tileWidth=16
+tileHeight=6
+scaleX=5
+scaleY=5
+dataLength=6
+data=2, 1, 12, 1, 5, 12,;
