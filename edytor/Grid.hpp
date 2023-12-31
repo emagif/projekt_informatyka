@@ -4,11 +4,8 @@
 class Grid 
 {
 private: 
-    sf::RectangleShape hLine;
-    sf::RectangleShape vLine;
-
-
-
+    sf::RectangleShape hLine[5 + 1]; // array of horizontal lines in the grid
+    sf::RectangleShape vLine[10 + 1]; // array of vertical lines in the grid
 
 public:
     Grid();
