@@ -14,11 +14,12 @@ private:
 
     sf::Vector2i m_totalLines;    // total lines on the X and Y axis
 
-     
-    int m_lineThickness; 
+    int m_lineThickness;          // specifying the line thickness
+ 
+    sf::Color m_color;            // specifying the line color   
 
 public:
-    Grid(const sf::Vector2i& totalCells);
+    Grid(const sf::Vector2f& position, const sf::Vector2i& cellSize, const sf::Vector2i& totalCells, const sf::Vector2i& scale, const sf::Color& color, int lineThickness);
     ~Grid();
 
     void Initialize(); 

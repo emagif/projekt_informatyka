@@ -1,6 +1,6 @@
 #include "Grid.hpp"
 
-Grid::Grid(const sf::Vector2i& totalCells) : m_position(100,100), m_scale(5, 5), m_totalCells(totalCells), m_cellSize(16, 16), m_lineThickness(2) // defining the values in the constructor
+Grid::Grid(const sf::Vector2f& position, const sf::Vector2i& totalCells, const sf::Vector2i& cellSize, const sf::Vector2i& scale, const sf::Color& color, int lineThickness) : m_position(position), m_scale(scale), m_totalCells(totalCells), m_cellSize(cellSize), m_lineThickness(lineThickness), m_color(color) // defining the values in the constructor
 {
     m_totalLines = sf::Vector2i(totalCells.x + 1,totalCells.y + 1); // amount of total lines +1 in every dimension
 
@@ -26,12 +26,14 @@ void Grid::Initialize()
     {
         m_hLine[i].setSize(sf::Vector2f(horizontalLineLength, m_lineThickness));
         m_hLine[i].setPosition(m_position + sf::Vector2f(0, i * m_cellSize.y * m_scale.y)); // draws a line every 16px on the Y axis
+        m_hLine[i].setFillColor(m_color);
     }
 
      for(int i = 0; i < m_totalLines.x; i++)
     {
         m_vLine[i].setSize(sf::Vector2f(m_lineThickness, verticalLineLength));
         m_vLine[i].setPosition(m_position + sf::Vector2f(i * m_cellSize.x * m_scale.x, 0)); // draws a line every 16px on the X axis
+        m_vLine[i].setFillColor(m_color);
     }
 }
 
