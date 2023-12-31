@@ -5,6 +5,8 @@ class MouseTile
 {
 
 private:
+    sf::Texture tileSheet;
+    sf::Sprite tile;
 
 public:
     MouseTile();

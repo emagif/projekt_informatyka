@@ -16,7 +16,7 @@ Grid::~Grid()
 
 void Grid::Initialize()
 {  
-    // grid for 10 elements  
+    // grid for 10 elements
     // 16x16, 10x16=160
 
     int horizontalLineLength = m_totalCells.x * m_cellSize.x * m_scale.x;
