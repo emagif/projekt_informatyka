@@ -27,7 +27,7 @@ sf::Clock clock;
 
 // main loop
 while(Window.isOpen())
-{
+{ 
     sf::Time deltaTimeTimer = clock.restart();
     double deltaTime = deltaTimeTimer.asMicroseconds() / 1000.0;
 

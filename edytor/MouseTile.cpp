@@ -26,10 +26,18 @@ void MouseTile::Load()
 
 void MouseTile::Update(double deltaTime, sf::Vector2f mousePosition)
 {
-    tile.setPosition(mousePosition);
+    int x  = mousePosition.x / (16 * 10); // dividing mouse position and then multiplying it to lose the decimal point and lose data from float
+    int xx = x * (16 * 10);
+
+    int y = mousePosition.y / (16 * 10);
+    int yy = y * (16 * 10);
+
+    tile.setPosition(sf::Vector2f(xx, yy)); // new position of the tile
 }
 
 void MouseTile::Draw(sf::RenderWindow& window)
 {
     window.draw(tile);
 }
+
+1h53 minuty 
