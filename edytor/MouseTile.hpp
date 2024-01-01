@@ -5,11 +5,14 @@ class MouseTile
 {
 
 private:
-    sf::Texture tileSheet;
-    sf::Sprite tile;
+    sf::Texture m_tileSheet;
+    sf::Sprite m_tile;
+
+    sf::Vector2i m_tileSize;
+    sf::Vector2f m_tileScale;
 
 public:
-    MouseTile();
+    MouseTile(const sf::Vector2i& tileSize, const sf::Vector2f& tileScale);
     ~MouseTile();
 
     void Initialize(); 

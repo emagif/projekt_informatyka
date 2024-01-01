@@ -12,7 +12,7 @@ Window.setFramerateLimit(360);
 
 
 Grid grid(sf::Vector2f(0, 0), sf::Vector2i(10, 10), sf::Vector2i(16, 16), sf::Vector2i(5, 5), sf::Color(255, 0, 0, 255), 2); // specifying all the attributes of the lines and the cells
-MouseTile mouseTile;
+MouseTile mouseTile(sf::Vector2i(16, 16), sf::Vector2f(5, 5));
 
 // INITIALIZING
 grid.Initialize(); // initializing the grid
