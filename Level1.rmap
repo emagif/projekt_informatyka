@@ -2,11 +2,11 @@
 version=1
 tilesheet=/home/emmanuel/Pulpit/projekt_zapas/Tilemap/tilemap_packed.png
 name=Level 1 
-mapWidth=3
-mapHeight=2
+mapWidth=16
+mapHeight=3
 tileWidth=16
-tileHeight=6
+tileHeight=16
 scaleX=5
 scaleY=5
-dataLength=6
-data=2, 1, 12, 1, 5, 12,;
+dataLength=48
+data=48, 49, 49, 15, 0, 0, 0, 0, 13, 48, 48, 48, 48, 48, 15, 0, 48, 48, 48, 57, 40, 40, 40, 40, 59, 48, 48, 48, 48, 48, 15, 0, 48, 48, 49, 50, 50, 50, 50, 50, 50, 48, 48, 48, 48, 48, 57, 40,;
