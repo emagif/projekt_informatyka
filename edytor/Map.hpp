@@ -1,19 +1,24 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "MouseTile.hpp"
 
 #define MAP_SIZE 50
 
 class Map
 {
 private: 
-    sf::Sprite* mapSprites;
+    MouseTile m_mouseTile;
+    sf::Sprite* m_mapSprites;
 
 public: 
-    Map();
+    Map(const MouseTile& mouseTile);
     ~Map();
 
     void Initialize();
     void Load();
     void Update(double deltaTime);
     void Draw(sf::RenderWindow& window);
+
+    void grid(int x);
+
 };

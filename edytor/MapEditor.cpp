@@ -2,6 +2,12 @@
 #include <iostream>
 #include "Grid.hpp"
 #include "MouseTile.hpp"
+#include "Map.hpp"
+
+void r(int z)
+{
+    std::cout<<z<<std::endl;
+}
 
 int main()
 {
@@ -11,8 +17,8 @@ sf::RenderWindow Window(sf::VideoMode(1280, 960), "Your own map editor :)");
 Window.setFramerateLimit(360);
 
 
-Grid grid(sf::Vector2f(0, 0), sf::Vector2i(10, 10), sf::Vector2i(16, 16), sf::Vector2i(5, 5), sf::Color(255, 0, 0, 255), 2); // specifying all the attributes of the lines and the cells
-MouseTile mouseTile(sf::Vector2i(16, 16), sf::Vector2f(5, 5));
+Grid grid(sf::Vector2f(200, 150), sf::Vector2i(10, 10), sf::Vector2i(16, 16), sf::Vector2i(5, 5), sf::Color(255, 0, 0, 255), 2); // specifying all the attributes of the lines and the cells
+MouseTile mouseTile(sf::Vector2i(16, 16), sf::Vector2f(5, 5), sf::Vector2f(200, 150));
 
 // INITIALIZING
 grid.Initialize(); // initializing the grid
@@ -50,8 +56,9 @@ while(Window.isOpen())
     }
 
     sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(Window));
+
     grid.Update(deltaTime); // grid update literally 
-    mouseTile.Update(deltaTime, mousePosition);
+    mouseTile.Update(deltaTime, mousePosition, &r);
     
 // Here I'm before the end of the main loop 
     Window.clear(sf::Color::Black);
