@@ -9,16 +9,16 @@
 
 int main()
 {
-//STREFA INICJALIZACJI
-// stworzenie okna głównego
+// INITIALIZATIZE
+// creating main window object
 sf::RenderWindow Play(sf::VideoMode(1280, 960), "Best game ever!");
 Play.setFramerateLimit(360);
 
-//stworzenie kul do strzelania
+// creating bullets
 std::vector<sf::RectangleShape> bullets;
 float bulletSpeed = 0.05f;
 
-//utworzenie gracza
+// creating objects
 FrameRate frameRate;
 Map map;
 Player player; 
@@ -26,13 +26,13 @@ Enemy enemy;
 
 
 
-//Strefa inicjalizacji przeciwnika i gracza
+// Initializing player and enemy
 frameRate.Initialize();
 map.Initialize();
 player.Initialize();
 enemy.Initialize();
 
-// Strefa ładowania przeciwnika i gracza
+// Loading player and enemy
 frameRate.Load();
 map.Load("Level1.rmap");
 player.Load();
@@ -40,14 +40,14 @@ enemy.Load();
 
 sf::Clock clock;
 
-//główna pętla
+// main loop
 while(Play.isOpen())
 {
-    //tworzenie niezależności poruszania się zawodnika od klatek
+    // creating player movement that is independent of the frame rate, should have done it in Player class
     sf::Time deltaTimeTimer = clock.restart();
     double deltaTime = deltaTimeTimer.asMicroseconds() / 1000.0;
 
-    // obsługa zdarzeń 
+    // event handling
     sf::Event event;
     while(Play.pollEvent(event))
     {
@@ -55,7 +55,7 @@ while(Play.isOpen())
         {
             Play.close();
         }
-        //zamykanie okna Esc
+        // closing window with ESC
         if(event.type == sf::Event::KeyPressed)
         {
         if(event.key.code == sf::Keyboard::Escape)
@@ -69,15 +69,15 @@ while(Play.isOpen())
 
     frameRate.Update(deltaTime);
     map.Update(deltaTime);
-    enemy.Update(deltaTime);
-    player.Update(deltaTime, enemy, mousePosition);
+    enemy.Update(deltaTime); // updating the posiiton of the enemy
+    player.Update(deltaTime, enemy, mousePosition, Play); // updating the position of the player
     
-// Tutaj jestem przed końcem while'a 
+// before the ending of the main loop
     Play.clear(sf::Color::Black);
-    map.Draw(Play);
-    enemy.Draw(Play);
-    player.Draw(Play);
-    frameRate.Draw(Play);
+    map.Draw(Play); // drawing the map
+    enemy.Draw(Play); // drawing the enemy
+    player.Draw(Play); // drawing the player
+    frameRate.Draw(Play); // drawing frame rate, should add points and timer
     Play.display();
 
 }
