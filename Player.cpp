@@ -44,7 +44,7 @@ else
 }
 
 
-void Player::Update(double deltaTime, Enemy& enemy, sf::Vector2f& mousePosition) // całość odpowiada za ruch zawodnika
+void Player::Update(double deltaTime, Enemy& enemy, sf::Vector2f& mousePosition, sf::RenderWindow& window) // responsible for the movement of the player
 {
 
 sf::Vector2f position = sprite.getPosition();
@@ -68,12 +68,32 @@ if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 {
     sprite.setPosition(position + sf::Vector2f(0,1) * playerSpeed* (float)deltaTime);
 }
+ // responsible for switching sides of the player when crossing the bounds of the window
+if(position.x > window.getSize().x)
+{
+    sprite.setPosition(0 - sprite.getGlobalBounds().width, position.y);
+}
+
+else if(position.x < 0 - sprite.getGlobalBounds().width)
+{
+    sprite.setPosition(window.getSize().x, position.y);
+}
+
+if(position.y > window.getSize().y)
+{
+    sprite.setPosition(position.x, 0 - sprite.getGlobalBounds().height);
+}
+
+else if(position.y < 0 - sprite.getGlobalBounds().height)
+{
+    sprite.setPosition(position.x, window.getSize().y);
+}
 
 
-// odpowiada za tworzenie i strzelanie pociskami
+// responsible for creating darts
 fireRateTimer += deltaTime;
 
-if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && fireRateTimer >= maxFireRate) // jeżeli naciśnięty jest przycisk myszy i fireRateTime jest większy niż 1s to można strzelać
+if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && fireRateTimer >= maxFireRate) // if the left button is pressed and fireRateTime is >1s then you can shoot again (change to a shorter amount of time)
 {
     bullets.push_back(Bullet());
     int i = bullets.size() - 1;
@@ -89,7 +109,7 @@ for(size_t i = 0; i<bullets.size(); i++)
 
     if(enemy.health > 0)
     {
-        if(Vector::DidRectCollide(bullets[i].GetGlobalBounds(), enemy.sprite.getGlobalBounds())) //sprawdzanie kolizji pocisku z przeciwnikiem
+        if(Vector::DidRectCollide(bullets[i].GetGlobalBounds(), enemy.sprite.getGlobalBounds())) // checking collision kolizji of the dart with enemy
         {
             enemy.ChangeHealth(-10);
             bullets.erase(bullets.begin() + i);

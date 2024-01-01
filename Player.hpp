@@ -27,9 +27,9 @@ public:
     Player();
     ~Player();
 
-    void Initialize(); //wywoływane raz
-    void Load(); //wywoływane raz
+    void Initialize(); // envoking once
+    void Load(); // envoking once
 
-    void Update(double deltaTime, Enemy& enemy, sf::Vector2f& mousePosition); //wywoływane raz na klatkę
-    void Draw(sf::RenderWindow& window); //wywoływane raz na klatkę
+    void Update(double deltaTime, Enemy& enemy, sf::Vector2f& mousePosition, sf::RenderWindow& window); // envoking once per fram
+    void Draw(sf::RenderWindow& window); // envoking once per frame
 };
