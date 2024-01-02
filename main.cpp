@@ -5,6 +5,7 @@
 #include "Enemy.hpp"
 #include "FrameRate.hpp"
 #include "Map.hpp"
+#include "MainMenu.hpp"
 
 
 int main()
@@ -19,11 +20,19 @@ std::vector<sf::RectangleShape> bullets;
 float bulletSpeed = 0.05f;
 
 // creating objects
-FrameRate frameRate;
-Map map;
-Player player; 
-Enemy enemy;
+FrameRate frameRate; // creating frame rate object to show frames
+Map map; // creating map object to render the map
+Player player; // creating the player
+Enemy enemy; // creating the enemy 
+MainMenu menu(Play.getSize().x, Play.getSize().y); // creating the menu
 
+// creating the menu
+// menu.AddItem("Start");
+// menu.AddItem("Help");
+// menu.AddItem("About the project");
+// menu.AddItem("Exit");
+
+// GameStateChoice state = GameStateChoice::Menu; // starting out with the menu on the screen
 
 
 // Initializing player and enemy
@@ -34,7 +43,7 @@ enemy.Initialize();
 
 // Loading player and enemy
 frameRate.Load();
-map.Load("Level1.rmap");
+map.Load("Level1.rmap"); // possible to load another map in the future
 player.Load();
 enemy.Load();
 
@@ -58,10 +67,10 @@ while(Play.isOpen())
         // closing window with ESC
         if(event.type == sf::Event::KeyPressed)
         {
-        if(event.key.code == sf::Keyboard::Escape)
-        {
-            Play.close();
-        }
+            if(event.key.code == sf::Keyboard::Escape)
+            {
+                Play.close();
+            }
         }
     }
 
@@ -74,6 +83,7 @@ while(Play.isOpen())
     
 // before the ending of the main loop
     Play.clear(sf::Color::Black);
+    menu.Draw(Play); // drawing the menu
     map.Draw(Play); // drawing the map
     enemy.Draw(Play); // drawing the enemy
     player.Draw(Play); // drawing the player
