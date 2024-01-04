@@ -1,28 +1,20 @@
 #include "CheckCollision.hpp"
+#include <iostream>
 
-CheckCollision::CheckCollision()
+CheckCollision::CheckCollision(std::vector<sf::RectangleShape>& rectangles) : m_rectangles(rectangles)
 {
-    
 }
 
-bool CheckCollision::areRectAndLineIntersecting(const sf::RectangleShape& rect, const std::vector<sf::VertexArray>& lines) const
+void CheckCollision::checkCollision(const sf::RectangleShape& rectangle, double deltaTime, Player1& player)
 {
-    sf::FloatRect rectBounds = rect.getGlobalBounds();
-
-    for (const auto& line : lines)
+    for (const auto& otherRect : m_rectangles)
     {
-        for (int i = 0; i < line.getVertexCount() - 1; ++i)
+        if(rectangle.getGlobalBounds().intersects(otherRect.getGlobalBounds()))
         {
-            sf::Vector2f p1 = line[i].position;
-            sf::Vector2f p2 = line[i + 1].position;
 
-            sf::FloatRect lineBounds = sf::FloatRect(p1.x, p1.y, p2.x - p1.x, p2.y - p1.y);
-
-            if(rectBounds.intersects(lineBounds))
-            {
-                return true;
-            }
+            sf::Vector2f position = player.m_sprite.getPosition();
+            std::cout<<"True"<<std::endl;
+            player.m_sprite.setPosition(position + sf::Vector2f(-3,0));
         }
     }
-    return false;
 }
