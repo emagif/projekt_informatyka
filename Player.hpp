@@ -15,13 +15,11 @@ private:
 
     float playerSpeed;
 
-
-    sf::RectangleShape boundingRectangle;
     sf::Vector2i size;
-    
     
 public:     
     sf::Sprite sprite;
+    sf::RectangleShape boundingRectangle;
 
 public: 
     Player();
