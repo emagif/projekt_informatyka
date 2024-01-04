@@ -4,7 +4,7 @@
 class LineDrawer : public sf::Drawable
 {
 private: 
-    std::vector<sf::VertexArray> m_lines;
+    
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override
     {
@@ -18,4 +18,6 @@ private:
 public: 
     LineDrawer();
     void addLine(const sf::Vector2f& pointA, const sf::Vector2f& pointB, sf::Color color);
+    
+    std::vector<sf::VertexArray> m_lines;
 };
