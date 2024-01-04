@@ -7,7 +7,8 @@
 #include "Map.hpp"
 #include "MainMenu.hpp"
 #include "LineDrawer.hpp"
-
+#include "CheckCollision.hpp"
+#include "DrawRectangles.hpp"
 
 int main()
 {
@@ -19,6 +20,7 @@ Play.setFramerateLimit(360);
 // creating bullets
 std::vector<sf::RectangleShape> bullets;
 float bulletSpeed = 0.05f;
+sf::Color transparentColor = sf::Color(255, 255, 255, 0);
 
 // creating objects
 FrameRate frameRate; // creating frame rate object to show frames
@@ -26,52 +28,23 @@ Map map; // creating map object to render the map
 Player player; // creating the player
 Enemy enemy; // creating the enemy 
 MainMenu menu(Play.getSize().x, Play.getSize().y); // creating the menu
-
 LineDrawer LineDrawer;
-LineDrawer.addLine(sf::Vector2f(250, 0), sf::Vector2f(250, 160), sf::Color::Red); //top left corner building borders
-LineDrawer.addLine(sf::Vector2f(250, 160), sf::Vector2f(710, 160), sf::Color::Blue);
-LineDrawer.addLine(sf::Vector2f(710, 160), sf::Vector2f(710, 0), sf::Color::Green);
+CheckCollision collisionChecker;
+DrawRectangles rectanglesDrawer;
 
-
-LineDrawer.addLine(sf::Vector2f(1120, 0), sf::Vector2f(1120, 240), sf::Color::White); // top right corner building borders
-LineDrawer.addLine(sf::Vector2f(1120, 240), sf::Vector2f(1280, 240), sf::Color::White);
-
-
-
-LineDrawer.addLine(sf::Vector2f(240, 320), sf::Vector2f(320, 320), sf::Color::White); // left wooden piece borders
-LineDrawer.addLine(sf::Vector2f(320, 320), sf::Vector2f(320, 240), sf::Color::White);
-LineDrawer.addLine(sf::Vector2f(320, 240), sf::Vector2f(240, 240), sf::Color::White);
-LineDrawer.addLine(sf::Vector2f(240, 240), sf::Vector2f(240, 320), sf::Color::White);
-
-LineDrawer.addLine(sf::Vector2f(480, 320), sf::Vector2f(560, 320), sf::Color::White); // middle wooden piece borders
-LineDrawer.addLine(sf::Vector2f(560, 320), sf::Vector2f(560, 240), sf::Color::White);
-LineDrawer.addLine(sf::Vector2f(560, 240), sf::Vector2f(480, 240), sf::Color::White);
-LineDrawer.addLine(sf::Vector2f(480, 240), sf::Vector2f(480, 320), sf::Color::White);
-
-LineDrawer.addLine(sf::Vector2f(720, 400), sf::Vector2f(800, 400), sf::Color::White); // right wooden piece borders
-LineDrawer.addLine(sf::Vector2f(800, 400), sf::Vector2f(800, 320), sf::Color::White);
-LineDrawer.addLine(sf::Vector2f(800, 320), sf::Vector2f(720, 320), sf::Color::White);
-LineDrawer.addLine(sf::Vector2f(720, 320), sf::Vector2f(720, 400), sf::Color::White);
-
-LineDrawer.addLine(sf::Vector2f(970, 390), sf::Vector2f(1030, 390), sf::Color::White); // sharp point borders
-LineDrawer.addLine(sf::Vector2f(1030, 390), sf::Vector2f(1030, 330), sf::Color::White);
-LineDrawer.addLine(sf::Vector2f(1030, 330), sf::Vector2f(970, 330), sf::Color::White);
-LineDrawer.addLine(sf::Vector2f(970, 330), sf::Vector2f(970, 390), sf::Color::White);
-
-
-LineDrawer.addLine(sf::Vector2f(0, 810), sf::Vector2f(240, 810), sf::Color::White); // left bottom building borders
-LineDrawer.addLine(sf::Vector2f(240, 810), sf::Vector2f(240, 960), sf::Color::White);
-
-LineDrawer.addLine(sf::Vector2f(1280, 810), sf::Vector2f(1120, 810), sf::Color::White); // right bottom building borders
-LineDrawer.addLine(sf::Vector2f(1120, 810), sf::Vector2f(1120, 960), sf::Color::White);
-
-LineDrawer.addLine(sf::Vector2f(240, 410), sf::Vector2f(720, 410), sf::Color::White); // middle building borders
-LineDrawer.addLine(sf::Vector2f(720, 410), sf::Vector2f(720, 630), sf::Color::White);
-LineDrawer.addLine(sf::Vector2f(720, 630), sf::Vector2f(240, 630), sf::Color::White);
-LineDrawer.addLine(sf::Vector2f(240, 630), sf::Vector2f(240, 410), sf::Color::White);
-
-
-
+rectanglesDrawer.addRectangle(250, 0, 460, 160, transparentColor); // top left corner building borders
+rectanglesDrawer.addRectangle(1120, 0, 260, 240, transparentColor); // top right corner building borders
+rectanglesDrawer.addRectangle(240, 240, 80, 80, transparentColor); // left wooden piece borders
+rectanglesDrawer.addRectangle(480, 240, 80, 80, transparentColor); // middle wooden piece borders
+rectanglesDrawer.addRectangle(720, 320, 80, 80, transparentColor); // right wooden piece borders
+rectanglesDrawer.addRectangle(720, 320, 80, 80, transparentColor); // right wooden piece borders
+rectanglesDrawer.addRectangle(970, 330, 60, 60, transparentColor); // right wooden piece borders
+rectanglesDrawer.addRectangle(0, 810, 240, 150, transparentColor); // left bottom building borders
+rectanglesDrawer.addRectangle(1120, 810, 160, 150, transparentColor); // right bottom building borders
+rectanglesDrawer.addRectangle(240, 410, 480, 225, transparentColor); // middle building borders
+rectanglesDrawer.addRectangle(1040, 410, 240, 230, transparentColor); // right building borders
+rectanglesDrawer.addRectangle(1120, 640, 80, 55, transparentColor); 
+rectanglesDrawer.addRectangle(400, 730, 480, 230, transparentColor); // middle bottom building borders
 
 // creating the menu
 // menu.AddItem("Start");
@@ -80,7 +53,6 @@ LineDrawer.addLine(sf::Vector2f(240, 630), sf::Vector2f(240, 410), sf::Color::Wh
 // menu.AddItem("Exit");
 
 // GameStateChoice state = GameStateChoice::Menu; // starting out with the menu on the screen
-
 
 // Initializing player and enemy
 frameRate.Initialize();
@@ -133,11 +105,11 @@ while(Play.isOpen())
     menu.Draw(Play); // drawing the menu
     map.Draw(Play); // drawing the map
     Play.draw(LineDrawer);
+    rectanglesDrawer.Draw(Play);
     enemy.Draw(Play); // drawing the enemy
     player.Draw(Play); // drawing the player
     frameRate.Draw(Play); // drawing frame rate, should add points and timer
     Play.display();
-
 }
 
     return 0;
