@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "Player.hpp"
+#include "Player1.hpp"
 #include "Enemy.hpp"
 #include "FrameRate.hpp"
 #include "Map.hpp"
@@ -9,6 +9,7 @@
 #include "LineDrawer.hpp"
 #include "CheckCollision.hpp"
 #include "DrawRectangles.hpp"
+
 
 int main()
 {
@@ -20,17 +21,17 @@ Play.setFramerateLimit(360);
 // creating bullets
 std::vector<sf::RectangleShape> bullets;
 float bulletSpeed = 0.05f;
-sf::Color transparentColor = sf::Color(255, 255, 255, 0);
+sf::Color transparentColor = sf::Color(255, 255, 255, 0); // setting transparency of the rectangles
 
 // creating objects
 FrameRate frameRate; // creating frame rate object to show frames
 Map map; // creating map object to render the map
-Player player; // creating the player
+Player1 player; // creating player1
 Enemy enemy; // creating the enemy 
 MainMenu menu(Play.getSize().x, Play.getSize().y); // creating the menu
 LineDrawer LineDrawer;
-CheckCollision collisionChecker;
 DrawRectangles rectanglesDrawer;
+CheckCollision collisionChecker(rectanglesDrawer.m_rectangles); // object for checking collision between the player and obstacles
 
 rectanglesDrawer.addRectangle(250, 0, 460, 160, transparentColor); // top left corner building borders
 rectanglesDrawer.addRectangle(1120, 0, 260, 240, transparentColor); // top right corner building borders
@@ -46,13 +47,6 @@ rectanglesDrawer.addRectangle(1040, 410, 240, 230, transparentColor); // right b
 rectanglesDrawer.addRectangle(1120, 640, 80, 55, transparentColor); 
 rectanglesDrawer.addRectangle(400, 730, 480, 230, transparentColor); // middle bottom building borders
 
-// creating the menu
-// menu.AddItem("Start");
-// menu.AddItem("Help");
-// menu.AddItem("About the project");
-// menu.AddItem("Exit");
-
-// GameStateChoice state = GameStateChoice::Menu; // starting out with the menu on the screen
 
 // Initializing player and enemy
 frameRate.Initialize();
@@ -97,17 +91,18 @@ while(Play.isOpen())
 
     frameRate.Update(deltaTime);
     map.Update(deltaTime);
-    enemy.Update(deltaTime); // updating the posiiton of the enemy
+    enemy.Update(deltaTime, player.boundingRectangle.getPosition()); // updating the posiiton of the enemy
     player.Update(deltaTime, enemy, mousePosition, Play); // updating the position of the player
-    
+    collisionChecker.checkCollision(player.boundingRectangle, deltaTime, player);
+
 // before the ending of the main loop
     Play.clear(sf::Color::Black);
     menu.Draw(Play); // drawing the menu
     map.Draw(Play); // drawing the map
-    Play.draw(LineDrawer);
-    rectanglesDrawer.Draw(Play);
+    // Play.draw(LineDrawer);
     enemy.Draw(Play); // drawing the enemy
     player.Draw(Play); // drawing the player
+    rectanglesDrawer.Draw(Play);
     frameRate.Draw(Play); // drawing frame rate, should add points and timer
     Play.display();
 }
