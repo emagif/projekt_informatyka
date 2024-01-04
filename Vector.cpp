@@ -21,6 +21,4 @@ bool Vector::DidRectCollide(sf::FloatRect rect1, sf::FloatRect rect2)
     {
         return true;    
     }
-
-
 }
