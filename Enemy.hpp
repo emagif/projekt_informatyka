@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Bullet.hpp"
 
 class Enemy 
 {
@@ -25,7 +26,7 @@ public:
 
     void Initialize(); //wywołane raz
     void Load(); //wywołane raz
-    void Update(double deltaTime); //wywołane przy każdej klatce
+    void Update(double deltaTime, const sf::Vector2f& playerPosition); //wywołane przy każdej klatce
     void Draw(sf::RenderWindow& window); //wywołane przy każdej klatce
 
 };
