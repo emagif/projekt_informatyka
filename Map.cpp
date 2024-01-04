@@ -1,5 +1,6 @@
 #include "Map.hpp"
 #include <iostream>
+#include "Player1.hpp"
 
 Map::Map() :totalTilesX(0), totalTilesY(0), totalTiles(0), tiles(nullptr), mapSprites(nullptr)
 {

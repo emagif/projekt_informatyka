@@ -19,7 +19,6 @@ private:
     int totalTilesX;
     int totalTilesY;
 
-
     sf::Sprite* mapSprites;
 
 public:
@@ -31,5 +30,5 @@ public:
 
     void Update(double deltaTime); //wywoływane raz na klatkę
     void Draw(sf::RenderWindow& window); //wywoływane raz na klatkę
-    
+
 };
