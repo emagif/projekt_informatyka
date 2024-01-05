@@ -10,7 +10,6 @@ Player1::~Player1()
 {
 }
 
-
 void Player1::Initialize()
 {
     boundingRectangle.setFillColor(sf::Color::Transparent);
@@ -19,7 +18,6 @@ void Player1::Initialize()
 
     size = sf::Vector2i(64, 64);
 }
-
 
 void Player1::Load() //odpowiada za załadowanie tekstury i sprite
 {
@@ -42,7 +40,6 @@ else
     std::cout<<"The texture is not here"<<std::endl;
 }
 }
-
 
 void Player1::Update(double deltaTime, Enemy& enemy, sf::Vector2f& mousePosition, sf::RenderWindow& window) // responsible for the movement of the player
 {
@@ -89,7 +86,6 @@ else if(position.y < 0 - m_sprite.getGlobalBounds().height)
     m_sprite.setPosition(position.x, window.getSize().y);
 }
 
-
 // responsible for creating darts
 fireRateTimer += deltaTime;
 
@@ -100,7 +96,6 @@ if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && fireRateTimer >= maxFi
     bullets[i].Initialize(m_sprite.getPosition(), mousePosition, 0.5f);
     fireRateTimer = 0;
 }
-
 
 for(size_t i = 0; i<bullets.size(); i++)
 {
@@ -117,7 +112,6 @@ for(size_t i = 0; i<bullets.size(); i++)
     }
 }
 boundingRectangle.setPosition(m_sprite.getPosition());
-
 }
 
 void Player1::Draw(sf::RenderWindow& window)
