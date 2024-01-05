@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
 #include <iostream>
 
 #include "Player1.hpp"
@@ -9,6 +11,8 @@
 #include "LineDrawer.hpp"
 #include "CheckCollision.hpp"
 #include "DrawRectangles.hpp"
+#include "CheckCollisionEnemy.hpp"
+
 
 
 int main()
@@ -32,6 +36,8 @@ MainMenu menu(Play.getSize().x, Play.getSize().y); // creating the menu
 LineDrawer LineDrawer;
 DrawRectangles rectanglesDrawer;
 CheckCollision collisionChecker(rectanglesDrawer.m_rectangles); // object for checking collision between the player and obstacles
+CheckCollisionEnemy checker(rectanglesDrawer.m_rectangles);
+
 
 rectanglesDrawer.addRectangle(250, 0, 460, 160, transparentColor); // top left corner building borders
 rectanglesDrawer.addRectangle(1120, 0, 260, 240, transparentColor); // top right corner building borders
@@ -94,6 +100,8 @@ while(Play.isOpen())
     enemy.Update(deltaTime, player.boundingRectangle.getPosition()); // updating the posiiton of the enemy
     player.Update(deltaTime, enemy, mousePosition, Play); // updating the position of the player
     collisionChecker.checkCollision(player.boundingRectangle, deltaTime, player);
+    checker.checkCollisionBetweenPlayerAndEnemy(player, deltaTime, enemy); // checks the collision between player and enemy
+
 
 // before the ending of the main loop
     Play.clear(sf::Color::Black);
