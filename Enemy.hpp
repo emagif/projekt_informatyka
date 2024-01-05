@@ -24,9 +24,9 @@ public:
 
     void ChangeHealth(int hp);
 
-    void Initialize(); //wywołane raz
-    void Load(); //wywołane raz
-    void Update(double deltaTime, const sf::Vector2f& playerPosition); //wywołane przy każdej klatce
-    void Draw(sf::RenderWindow& window); //wywołane przy każdej klatce
+    void Initialize(); // called once
+    void Load(); // called once
+    void Update(double deltaTime, const sf::Vector2f& playerPosition); // called once per frame
+    void Draw(sf::RenderWindow& window); // called once per frame
 
 };
