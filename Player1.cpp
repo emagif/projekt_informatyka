@@ -2,7 +2,7 @@
 #include "Player1.hpp"
 #include "Vector.hpp"
 
-Player1::Player1() : playerSpeed(1.0f), maxFireRate(1000), fireRateTimer(0)
+Player1::Player1() : playerSpeed(0.3f), maxFireRate(1000), fireRateTimer(0)
 {
 }
 
@@ -48,21 +48,49 @@ sf::Vector2f position = m_sprite.getPosition();
 
 if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) // when A is pressed the player goes to the left
 {
+    if(texture.loadFromFile("/home/emmanuel/Pulpit/projekt_informatyka/Tilemap/BODY_skeleton.png"))
+    {
+        int XIndex = 0;
+        int YIndex = 1;
+        m_sprite.setTexture(texture);
+        m_sprite.setTextureRect(sf::IntRect(XIndex * size.x, YIndex * size.y, size.x, size.y));
+    }
     m_sprite.setPosition(position + sf::Vector2f(-1,0) * playerSpeed * (float)deltaTime);
 }
     
 if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) // when D is pressed the player goes to the right
 {
+     if(texture.loadFromFile("/home/emmanuel/Pulpit/projekt_informatyka/Tilemap/BODY_skeleton.png"))
+    {
+        int XIndex = 0;
+        int YIndex = 3;
+        m_sprite.setTexture(texture);
+        m_sprite.setTextureRect(sf::IntRect(XIndex * size.x, YIndex * size.y, size.x, size.y));
+    }
     m_sprite.setPosition(position + sf::Vector2f(1,0) * playerSpeed * (float)deltaTime);
 }
 
 if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) // when W is pressed the player goes to the top
 {
+     if(texture.loadFromFile("/home/emmanuel/Pulpit/projekt_informatyka/Tilemap/BODY_skeleton.png"))
+    {
+        int XIndex = 0;
+        int YIndex = 0;
+        m_sprite.setTexture(texture);
+        m_sprite.setTextureRect(sf::IntRect(XIndex * size.x, YIndex * size.y, size.x, size.y));
+    }
     m_sprite.setPosition(position + sf::Vector2f(0,-1) * playerSpeed * (float)deltaTime);
 }
 
 if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) // when S is pressed the player goes to the bottom
 {
+     if(texture.loadFromFile("/home/emmanuel/Pulpit/projekt_informatyka/Tilemap/BODY_skeleton.png"))
+    {
+        int XIndex = 0;
+        int YIndex = 2;
+        m_sprite.setTexture(texture);
+        m_sprite.setTextureRect(sf::IntRect(XIndex * size.x, YIndex * size.y, size.x, size.y));
+    }
     m_sprite.setPosition(position + sf::Vector2f(0,1) * playerSpeed* (float)deltaTime);
 }
  // responsible for switching sides of the player when crossing the bounds of the window
