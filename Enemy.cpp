@@ -41,7 +41,7 @@ else
     std::cout<<"Failed to load the font"<<std::endl;
 }
 
-if(texture.loadFromFile("Tiles/tile_0086.png"))
+if(texture.loadFromFile("/home/emmanuel/Pulpit/projekt_informatyka/Tiles/tile_0121.png"))
 {
     sprite.setTexture(texture);
     sprite.scale(sf::Vector2f(2,2));
