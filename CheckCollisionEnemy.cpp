@@ -61,11 +61,13 @@ void CheckCollisionEnemy::checkCollisionBetweenPlayerAndEnemy(Player1& player, d
 {
     if(player.m_sprite.getGlobalBounds().intersects(enemy.sprite.getGlobalBounds()))
     {
-        std::ofstream scoreFile("ScoreFile.rmap");
+        std::ofstream scoreFile("ScoreFile.rmap", std::ios::app);
 
         if(scoreFile.is_open())
         {
-            scoreFile << "Final score: "<< static_cast<int>(points.m_score.asSeconds());
+            scoreFile << "Final score: "<< static_cast<int>(points.m_score.asSeconds())<<std::endl;
+            scoreFile<<"Final Player position in the moment of collision: " <<(player.m_sprite.getPosition().x)<<" , "<<(player.m_sprite.getPosition().y)<<std::endl;
+            scoreFile<<std::endl;
             scoreFile.close();
         }
 
