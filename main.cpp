@@ -12,6 +12,7 @@
 #include "CheckCollision.hpp"
 #include "DrawRectangles.hpp"
 #include "CheckCollisionEnemy.hpp"
+#include "Points.hpp"
 
 
 
@@ -37,6 +38,7 @@ LineDrawer LineDrawer;
 DrawRectangles rectanglesDrawer;
 CheckCollision collisionChecker(rectanglesDrawer.m_rectangles); // object for checking collision between the player and obstacles
 CheckCollisionEnemy checker(rectanglesDrawer.m_rectangles);
+Points points;
 
 
 rectanglesDrawer.addRectangle(250, 0, 460, 160, transparentColor); // top left corner building borders
@@ -65,6 +67,7 @@ frameRate.Load();
 map.Load("Level1.rmap"); // possible to load another map in the future
 player.Load();
 enemy.Load();
+points.SetPosition(1000, 20);
 
 sf::Clock clock;
 
@@ -100,7 +103,8 @@ while(Play.isOpen())
     enemy.Update(deltaTime, player.boundingRectangle.getPosition()); // updating the posiiton of the enemy
     player.Update(deltaTime, enemy, mousePosition, Play); // updating the position of the player
     collisionChecker.checkCollision(player.boundingRectangle, deltaTime, player);
-    checker.checkCollisionBetweenPlayerAndEnemy(player, deltaTime, enemy); // checks the collision between player and enemy
+    checker.checkCollisionBetweenPlayerAndEnemy(player, deltaTime, enemy, Play, clock, points); // checks the collision between player and enemy and closes the game window
+    points.IncreaseScore(clock);
 
 
 // before the ending of the main loop
@@ -108,6 +112,7 @@ while(Play.isOpen())
     menu.Draw(Play); // drawing the menu
     map.Draw(Play); // drawing the map
     // Play.draw(LineDrawer);
+    points.Draw(Play);
     enemy.Draw(Play); // drawing the enemy
     player.Draw(Play); // drawing the player
     rectanglesDrawer.Draw(Play);
