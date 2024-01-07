@@ -25,7 +25,7 @@ public:
     void ChangeHealth(int hp);
 
     void Initialize(); // called once
-    void Load(); // called once
+    void Load(sf::Vector2f enemyPosition); // called once
     void Update(double deltaTime, const sf::Vector2f& playerPosition); // called once per frame
     void Draw(sf::RenderWindow& window); // called once per frame
 

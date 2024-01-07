@@ -25,7 +25,7 @@ void Enemy::Initialize()
     size = sf::Vector2i(16, 16);
 }
 
-void Enemy::Load()
+void Enemy::Load(sf::Vector2f enemyPosition)
 {
  
     if(font.loadFromFile("font/font.ttf")) //  health bar font
@@ -45,7 +45,7 @@ if(texture.loadFromFile("/home/emmanuel/Pulpit/projekt_informatyka/Tiles/tile_01
 {
     sprite.setTexture(texture);
     sprite.scale(sf::Vector2f(2,2));
-    sprite.setPosition(sf::Vector2f(500,700));
+    sprite.setPosition(sf::Vector2f(enemyPosition.x, enemyPosition.y));
 
     boundingRectangle.setSize(sf::Vector2f(size.x * sprite.getScale().x, size.y * sprite.getScale().y));
 }
