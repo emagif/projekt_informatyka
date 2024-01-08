@@ -20,7 +20,6 @@ void SavingAndReadingFromFile::SaveToFile(sf::RenderWindow& window, Points& poin
                     scoreFileAppend<<std::endl;
                     scoreFileAppend.close();
                 }
-                
             }
         }
     }
