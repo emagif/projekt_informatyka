@@ -14,7 +14,7 @@
 #include "CheckCollisionEnemy.hpp"
 #include "Points.hpp"
 #include "SavingAndReadingFromFile.hpp"
-
+#include "RefreshWindow.hpp"
 
 
 
@@ -43,6 +43,7 @@ CheckCollision collisionChecker(rectanglesDrawer.m_rectangles); // object for ch
 CheckCollisionEnemy checker(rectanglesDrawer.m_rectangles);
 Points points;
 SavingAndReadingFromFile SaverAndReader;
+RefreshWindow stopWindow;
 
 
 
@@ -84,10 +85,16 @@ while(Play.isOpen())
     sf::Time deltaTimeTimer = clock.restart();
     double deltaTime = deltaTimeTimer.asMicroseconds() / 1000.0;
 
+
+
     // event handling
     sf::Event event;
+
+    stopWindow.StopGame(Play, event); // stopping the window
+
     while(Play.pollEvent(event))
     {
+
 
         if(event.type == sf::Event::Closed)
         {
@@ -103,33 +110,36 @@ while(Play.isOpen())
         }
     }
 
-    sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(Play));
+    if(stopWindow.IsGameActive())
+    {   
+        sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(Play));
 
-    frameRate.Update(deltaTime);
-    map.Update(deltaTime);
-    enemy.Update(deltaTime, player.boundingRectangle.getPosition()); // updating the posiiton of the enemy
-    enemy1.Update(deltaTime, player.boundingRectangle.getPosition());
-    player.Update(deltaTime, enemy, mousePosition, Play); // updating the position of the player
-    collisionChecker.checkCollision(player.boundingRectangle, deltaTime, player);
-    checker.checkCollisionBetweenPlayerAndEnemy(player, deltaTime, enemy, Play, clock, points); // checks the collision between player and enemy and closes the game window
-    checker.checkCollisionBetweenPlayerAndEnemy(player, deltaTime, enemy1, Play, clock, points); // checks the collision between player and enemy and closes the game window
-    points.IncreaseScore(clock);
-    SaverAndReader.SaveToFile(Play, points, player, event);
+        frameRate.Update(deltaTime);
+        map.Update(deltaTime);
+        enemy.Update(deltaTime, player.boundingRectangle.getPosition()); // updating the posiiton of the enemy
+        enemy1.Update(deltaTime, player.boundingRectangle.getPosition());
+        player.Update(deltaTime, enemy, mousePosition, Play); // updating the position of the player
+        collisionChecker.checkCollision(player.boundingRectangle, deltaTime, player);
+        checker.checkCollisionBetweenPlayerAndEnemy(player, deltaTime, enemy, Play, clock, points); // checks the collision between player and enemy and closes the game window
+        checker.checkCollisionBetweenPlayerAndEnemy(player, deltaTime, enemy1, Play, clock, points); // checks the collision between player and enemy and closes the game window
+        points.IncreaseScore(clock);
+        SaverAndReader.SaveToFile(Play, points, player, event);
 
 
 // before the ending of the main loop
-    Play.clear(sf::Color::Black);
-    menu.Draw(Play); // drawing the menu
-    map.Draw(Play); // drawing the map
-    // Play.draw(LineDrawer);
-    points.Draw(Play);
-    enemy.Draw(Play); // drawing the enemy
-    enemy1.Draw(Play); // drawing the enemy
-    player.Draw(Play); // drawing the player
-    rectanglesDrawer.Draw(Play);
-    frameRate.Draw(Play); // drawing frame rate, should add points and timer
-    Play.display();
-}
+        Play.clear(sf::Color::Black);
+        menu.Draw(Play); // drawing the menu
+        map.Draw(Play); // drawing the map
+        // Play.draw(LineDrawer);
+        points.Draw(Play);
+        enemy.Draw(Play); // drawing the enemy
+        enemy1.Draw(Play); // drawing the enemy
+        player.Draw(Play); // drawing the player
+        rectanglesDrawer.Draw(Play);
+        frameRate.Draw(Play); // drawing frame rate, should add points and timer
+        Play.display();
 
+    }
+}
     return 0;
 }
