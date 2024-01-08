@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-
 #include <iostream>
 
 #include "Player1.hpp"
@@ -15,8 +14,6 @@
 #include "Points.hpp"
 #include "SavingAndReadingFromFile.hpp"
 #include "RefreshWindow.hpp"
-
-
 
 int main()
 {
@@ -44,8 +41,6 @@ CheckCollisionEnemy checker(rectanglesDrawer.m_rectangles);
 Points points;
 SavingAndReadingFromFile SaverAndReader;
 RefreshWindow stopWindow;
-
-
 
 rectanglesDrawer.addRectangle(250, 0, 460, 160, transparentColor); // top left corner building borders
 rectanglesDrawer.addRectangle(1120, 0, 260, 240, transparentColor); // top right corner building borders
@@ -85,8 +80,6 @@ while(Play.isOpen())
     sf::Time deltaTimeTimer = clock.restart();
     double deltaTime = deltaTimeTimer.asMicroseconds() / 1000.0;
 
-
-
     // event handling
     sf::Event event;
 
@@ -94,8 +87,6 @@ while(Play.isOpen())
 
     while(Play.pollEvent(event))
     {
-
-
         if(event.type == sf::Event::Closed)
         {
             Play.close();
@@ -110,7 +101,7 @@ while(Play.isOpen())
         }
     }
 
-    if(stopWindow.IsGameActive())
+    if(stopWindow.IsGameActive()) // checks if the flag
     {   
         sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(Play));
 
@@ -122,9 +113,8 @@ while(Play.isOpen())
         collisionChecker.checkCollision(player.boundingRectangle, deltaTime, player);
         checker.checkCollisionBetweenPlayerAndEnemy(player, deltaTime, enemy, Play, clock, points); // checks the collision between player and enemy and closes the game window
         checker.checkCollisionBetweenPlayerAndEnemy(player, deltaTime, enemy1, Play, clock, points); // checks the collision between player and enemy and closes the game window
-        points.IncreaseScore(clock);
-        SaverAndReader.SaveToFile(Play, points, player, event);
-
+        points.IncreaseScore(clock); // increases the score
+        SaverAndReader.SaveToFile(Play, points, player, event); // saves to file
 
 // before the ending of the main loop
         Play.clear(sf::Color::Black);
