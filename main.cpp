@@ -22,6 +22,15 @@ int main()
 sf::RenderWindow Play(sf::VideoMode(1280, 960), "Best game ever!");
 Play.setFramerateLimit(360);
 
+sf::RenderWindow Menu(sf::VideoMode(1280, 960), "Menu :)");
+Menu.setFramerateLimit(360);
+
+sf::RenderWindow Help(sf::VideoMode(1280, 960), "Help");
+Help.setFramerateLimit(360);
+
+sf::RenderWindow Difficulty(sf::VideoMode(1280, 960), "Difficulty");
+Difficulty.setFramerateLimit(360);
+
 // creating bullets
 std::vector<sf::RectangleShape> bullets;
 float bulletSpeed = 0.05f;
