@@ -51,10 +51,16 @@ private:
 
 public: 
     MainMenu(float width, float height);
+    ~MainMenu();
 
     void Draw(sf::RenderWindow& window);
     void MoveUp();
     void MoveDown();
+
+    int selectedItem()
+    {
+        return m_selectedItemIndex;
+    }
 
 };
 

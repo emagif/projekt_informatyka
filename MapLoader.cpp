@@ -132,6 +132,3 @@ void MapLoader::Load(std::string filename, MapData& mapData)
     }
 }
 
-
-
-// https://www.3dgep.com/cpp-fast-track-17-ai/

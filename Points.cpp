@@ -2,7 +2,7 @@
 
 Points::Points() : m_score(sf::Time::Zero)
 {
-    if(!m_font.loadFromFile("/home/emmanuel/Pulpit/projekt_informatyka/font/font.ttf"))
+    if(!m_font.loadFromFile("font/font.ttf"))
     {
         std::cout<<"The programmer did something wrong, cannot load the file"<<std::endl;
     }

@@ -12,7 +12,7 @@ void SavingAndReadingFromFile::SaveToFile(sf::RenderWindow& window, Points& poin
         {
             if(event.key.code == sf::Keyboard::K)
             {
-                std::ofstream scoreFileAppend("/home/emmanuel/Pulpit/projekt_informatyka/PointsDuringGame.rmap", std::ios::app);
+                std::ofstream scoreFileAppend("PointsDuringGame.rmap", std::ios::app);
                 if(scoreFileAppend.is_open())
                 {
                     scoreFileAppend<<"Current amount of points: "<<static_cast<int>(points.m_score.asSeconds())<<std::endl;

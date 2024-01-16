@@ -74,7 +74,7 @@ void CheckCollisionEnemy::checkCollisionBetweenPlayerAndEnemy(Player1& player, d
 
 
         sf::Time elapsedTime = clock.getElapsedTime();
-        if(!m_font.loadFromFile("/home/emmanuel/Pulpit/projekt_informatyka/font/font.ttf")) // loads the font 
+        if(!m_font.loadFromFile("font/font.ttf")) // loads the font 
         {
             std::cout<<"Programmer did something wrong :("<<std::endl;
         }

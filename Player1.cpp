@@ -48,7 +48,7 @@ sf::Vector2f position = m_sprite.getPosition();
 
 if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) // when A is pressed the player goes to the left
 {
-    if(texture.loadFromFile("/home/emmanuel/Pulpit/projekt_informatyka/Tilemap/BODY_skeleton.png"))
+    if(texture.loadFromFile("Tilemap/BODY_skeleton.png"))
     {
         int XIndex = 0;
         int YIndex = 1;
@@ -60,7 +60,7 @@ if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) // when A is pressed the player 
     
 if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) // when D is pressed the player goes to the right
 {
-     if(texture.loadFromFile("/home/emmanuel/Pulpit/projekt_informatyka/Tilemap/BODY_skeleton.png"))
+     if(texture.loadFromFile("Tilemap/BODY_skeleton.png"))
     {
         int XIndex = 0;
         int YIndex = 3;
@@ -72,7 +72,7 @@ if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) // when D is pressed the player 
 
 if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) // when W is pressed the player goes to the top
 {
-     if(texture.loadFromFile("/home/emmanuel/Pulpit/projekt_informatyka/Tilemap/BODY_skeleton.png"))
+     if(texture.loadFromFile("Tilemap/BODY_skeleton.png"))
     {
         int XIndex = 0;
         int YIndex = 0;
@@ -84,7 +84,7 @@ if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) // when W is pressed the player 
 
 if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) // when S is pressed the player goes to the bottom
 {
-     if(texture.loadFromFile("/home/emmanuel/Pulpit/projekt_informatyka/Tilemap/BODY_skeleton.png"))
+     if(texture.loadFromFile("Tilemap/BODY_skeleton.png"))
     {
         int XIndex = 0;
         int YIndex = 2;
